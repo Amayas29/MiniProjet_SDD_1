@@ -2,6 +2,7 @@
 #include "algo.h"
 #include "tableau.h"
 #include "matrice.h"
+#include "commun.h"
 
 int somme_1(int *tableau, int taille) {
     int somme = 0;
@@ -75,19 +76,29 @@ int **produit_mat_1(int **mat1, int **mat2, int m, int n, int p) {
     return prod;
 }
 
-int **produit_triang(int **sup, int **inf, int m, int n, int p) {
+int **produit_triang(MatriceTriangulaire *sup, MatriceTriangulaire *inf) {
 
-    int **prod = alloue_matrice(m, p);
-    if(!prod) return NULL;
-
-    for(int i = 0; i < n; i++) {
-        for(int j = 0; j < p; j++) {
-            prod[i][j] = 0;
-            int k = i < j ? j : i;
-            for(; k < m; k++)
-                prod[i][j] += sup[i][k] * inf[k][j];
-        } 
+    if(sup->taille != inf->taille) {
+        print_probleme("les matrice ne sont pas de la meme taille");
+        return NULL;
     }
+
+    if(sup->orientation && !inf->orientation){
+        print_probleme("prbleme d'incompatibilité");
+        return NULL;
+    }
+
+    int **prod = alloue_matrice(sup->taille,inf->taille);
+    if(!prod) return NULL;
+    for(int i = 0; i < sup->taille; i++) {
+     for(int j = 0; j < sup->taille; j++) {
+         prod[i][j] = 0;
+      int k = i < j ? j : i;
+      for(; k < inf->taille; k++)
+           prod[i][j] += sup->matrice[i][k] * inf->matrice[k][j];
+     } 
+  }
+            
 
     return prod;
 }

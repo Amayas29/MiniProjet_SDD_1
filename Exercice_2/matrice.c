@@ -40,7 +40,7 @@ MatriceTriangulaire *alloue_matrice_triangulaire(int taille,int orientation){
     
     MatriceTriangulaire *matrice = (MatriceTriangulaire *) malloc(sizeof(MatriceTriangulaire));
     if(!matrice){
-        print_probleme("alloucation de matrice triangulaire echouer");
+        print_probleme("allocation de matrice triangulaire echouer");
         return NULL;
     }
 
@@ -52,13 +52,19 @@ MatriceTriangulaire *alloue_matrice_triangulaire(int taille,int orientation){
     matrice->matrice = (int **) malloc(sizeof(int *) * taille);
     
     if(!matrice){
-        print_probleme("alloucation de la matrice triangulaire echouer");
+        print_probleme("allocation de la matrice triangulaire echouer");
         return NULL;
     }
     for(int i  = 0; i < taille; i++){
         matrice->matrice[i] = (int) malloc(sizeof(int) * (orientation * (taille-i)+ (1 - orientation) * ( i+1 )));
         if(!matrice->matrice[i]){
-            
+            print_probleme("allocation du tableau echouer");
+            for(int j = 0;j<i;i++){
+                free(matrice->matrice[j]);
+            }
+            return NULL;
         }
     }
+
+    return matrice;
 }

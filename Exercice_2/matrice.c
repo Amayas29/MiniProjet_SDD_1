@@ -36,28 +36,29 @@ void afficher_matrice(int **matrice, int n, int m) {
         afficher_tableau(matrice[ i ], m);
 }
 
-void remplir_matrice_sup(int **matrice, int n, int m, int valeur) {
+MatriceTriangulaire *alloue_matrice_triangulaire(int taille,int orientation){
     
-    for(int i = 0; i < n; i++) {
-        for(int j = 0; j < m; j++) {
-
-            if(i > j)
-                matrice[ i ][ j ] = 0;
-            else
-                matrice[ i ][ j ] = rand() % valeur;
-        }
+    MatriceTriangulaire *matrice = (MatriceTriangulaire *) malloc(sizeof(MatriceTriangulaire));
+    if(!matrice){
+        print_probleme("alloucation de matrice triangulaire echouer");
+        return NULL;
     }
-}
 
-void remplir_matrice_inf(int **matrice, int n, int m, int valeur) {
+    if(orientation != 0 && orientation != 1)
+        orientation = 1;
+    matrice->orientation = orientation;
+    matrice->taille = taille;
+
+    matrice->matrice = (int **) malloc(sizeof(int *) * taille);
     
-    for(int i = 0; i < n; i++) {
-        for(int j = 0; j < m; j++) {
-
-            if(i < j)
-                matrice[ i ][ j ] = 0;
-            else
-                matrice[ i ][ j ] = rand() % valeur;
+    if(!matrice){
+        print_probleme("alloucation de la matrice triangulaire echouer");
+        return NULL;
+    }
+    for(int i  = 0; i < taille; i++){
+        matrice->matrice[i] = (int) malloc(sizeof(int) * (orientation * (taille-i)+ (1 - orientation) * ( i+1 )));
+        if(!matrice->matrice[i]){
+            
         }
     }
 }

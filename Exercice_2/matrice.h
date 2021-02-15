@@ -9,10 +9,10 @@ typedef struct _matrice_triangulaire {
 } MatriceTriangulaire;
 
 
-int **alloue_matrice(int n, int m);
+int **alloue_matrice(int n);
 void desaloue_matrice(int **matrice, int n);
-void remplir_matrice(int **matrice, int n, int m, int valeur);
-void afficher_matrice(int **matrice, int n, int m);
+void remplir_matrice(int **matrice, int n, int valeur);
+void afficher_matrice(int **matrice, int n);
 
 MatriceTriangulaire *alloue_matrice_triangulaire(int taille, int orientation);
 void remplir_matrice_triangulaire(MatriceTriangulaire *matrice, int valeur);

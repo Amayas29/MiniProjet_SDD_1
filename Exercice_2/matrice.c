@@ -4,7 +4,7 @@
 #include "commun.h"
 #include "tableau.h"
 
-int **alloue_matrice(int n, int m) {
+int **alloue_matrice(int n) {
 
     int **matrice = malloc(sizeof(int *) * n);
 
@@ -14,7 +14,7 @@ int **alloue_matrice(int n, int m) {
     }
 
     for(int i = 0; i < n ; i++)
-        matrice[ i ] = alloue_tableau(m);
+        matrice[ i ] = alloue_tableau(n);
 
     return matrice;
 }
@@ -26,14 +26,14 @@ void desaloue_matrice(int **matrice, int n) {
     free(matrice);
 }
 
-void remplir_matrice(int **matrice, int n, int m, int valeur) {
+void remplir_matrice(int **matrice, int n, int valeur) {
     for(int i = 0; i < n; i++)
-        remplir_tableau(matrice[ i ], m, valeur);
+        remplir_tableau(matrice[ i ], n, valeur);
 }
 
-void afficher_matrice(int **matrice, int n, int m) {
+void afficher_matrice(int **matrice, int n) {
     for(int i = 0; i < n; i++)
-        afficher_tableau(matrice[ i ], m);
+        afficher_tableau(matrice[ i ], n);
 }
 
 MatriceTriangulaire *alloue_matrice_triangulaire(int taille,int orientation){

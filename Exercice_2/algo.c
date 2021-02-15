@@ -60,15 +60,15 @@ int verfie_matrice_2(int **matrice, int n, int m, int *check, int maxValeur) {
     return 1;
 }
 
-int **produit_mat_1(int **mat1, int **mat2, int m, int n, int p) {
+int **produit_mat_1(int **mat1, int **mat2, int m) {
     
     int **prod = alloue_matrice(m, p);
     if(!prod) return NULL;
 
     for(int i = 0; i < m; i++) {
-        for(int j = 0; j < p; j++) {
+        for(int j = 0; j < m; j++) {
             prod[i][j] = 0;
-            for(int k = 0; k < n; k++)
+            for(int k = 0; k < m; k++)
                 prod[i][j] += mat1[i][k] * mat2[k][j];
         }
     }
@@ -89,16 +89,21 @@ int **produit_triang(MatriceTriangulaire *sup, MatriceTriangulaire *inf) {
     }
 
     int **prod = alloue_matrice(sup->taille,inf->taille);
-    if(!prod) return NULL;
+    if(!prod){ 
+        print_probleme("erreur d'allocation de la matrice");
+        return NULL;
+    }
+    int l = 0;
     for(int i = 0; i < sup->taille; i++) {
-     for(int j = 0; j < sup->taille; j++) {
-         prod[i][j] = 0;
-      int k = i < j ? j : i;
-      for(; k < inf->taille; k++)
-           prod[i][j] += sup->matrice[i][k] * inf->matrice[k][j];
+        l = i;
+     for(int j = 0; j < sup->taille; j++) {  
+        prod[i][j] = 0;
+        for (int k = j; k < sup->taille; j++) {   
+            prod[i][j] += sup->matrice[i][l] * inf->matrice[k][j];
+            l++;
+        }
+        
      } 
   }
-            
-
     return prod;
 }

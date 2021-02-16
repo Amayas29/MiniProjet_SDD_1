@@ -36,7 +36,7 @@ int main() {
         temps_final = clock();
         temps_cpu_algo1 = ((double) (temps_final - temps_initial)) / CLOCKS_PER_SEC;
 
-        desaloue_matrice(p, n);
+        desalloue_matrice(p, n);
         matTriangulaireSup = alloue_matrice_triangulaire(n,1);
         matTriangulaireInf = alloue_matrice_triangulaire(n,0);
         temps_initial = clock();
@@ -44,7 +44,7 @@ int main() {
         temps_final = clock();
         temps_cpu_algo2 = ((double) (temps_final - temps_initial)) / CLOCKS_PER_SEC;
 
-        desaloue_matrice(p, n);
+        desalloue_matrice(p, n);
 
         fprintf(file, "%d %f %f\n", n*n, temps_cpu_algo1, temps_cpu_algo2);
 

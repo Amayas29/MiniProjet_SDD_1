@@ -40,7 +40,7 @@ int main() {
 
         fprintf(file, "%d %f %f\n", n*n, temps_cpu_algo1, temps_cpu_algo2);
 
-        desaloue_matrice(mat, n);
+        desalloue_matrice(mat, n);
         n++;
         
     }

@@ -34,7 +34,7 @@ void afficher_tableau(int *tableau, int taille) {
     if(!tableau) return;
 
     for(int i = 0; i < taille; i++)
-        printf("%d ", tableau[ i ]);
+        printf("%-5d ", tableau[ i ]);
     
     printf("\n");
 }

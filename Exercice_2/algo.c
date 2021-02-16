@@ -51,7 +51,6 @@ int verfie_matrice_2(int **matrice, int n, int *check, int maxValeur) {
     //on utilise un tableau de maxValeur de valeurs comme tableau de booleen (0 si il n'existe pas 1 sinon)
     for(int i = 0; i < maxValeur; i++)
         check[ i ] = 0;
-    
 
     for(int i = 0; i < n; i++) {
         for(int j = 0; j < n; j++) {
@@ -87,21 +86,24 @@ int **produit_mat_1(int **mat1, int **mat2, int m) {
 int **produit_triang(MatriceTriangulaire *sup, MatriceTriangulaire *inf) {
 
     if(sup->taille != inf->taille) {
-        print_probleme("les matrice ne sont pas de la meme taille");
+        print_probleme("Les matrice ne sont pas de la même taille");
         return NULL;
     }
 
     if(sup->orientation && !inf->orientation){
-        print_probleme("prbleme d'incompatibilité");
+        print_probleme("Prbleme d'incompatibilité");
         return NULL;
     }
 
     int **prod = alloue_matrice(sup->taille);
+
     if(!prod){ 
-        print_probleme("erreur d'allocation de la matrice");
+        print_probleme("Erreur d'allocation de la matrice");
         return NULL;
     }
+
     int l = 0;
+    
     // c'est la somme du produit ligne * colonne
     for(int i = 0; i < sup->taille; i++) {
         l = 0;

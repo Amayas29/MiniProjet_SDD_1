@@ -22,7 +22,7 @@ int **alloue_matrice(int n) {
 }
 
 // Permet de desalouer l'espace alloue a une matrice carre de taille n
-void desaloue_matrice(int **matrice, int n) {
+void desalloue_matrice(int **matrice, int n) {
 
     // On desaloue tous les tableaux
     for(int i = 0; i < n; i++)
@@ -143,15 +143,15 @@ void afficher_matrice_triangulaire(MatriceTriangulaire *matrice){
 
         // Si superieure on affiche les i premieres 0
         for (int j = 0; matrice->orientation && j < i; j++)
-            printf("0 ");
+            printf("%-5d ", 0);
         
         // On affiche les elements de la ligne
         for (int j = 0; j <  matrice->orientation * (matrice->taille-i) + (1 - matrice->orientation) * ( i+1 ); j++)
-            printf("%d ",matrice->matrice[i][j]);
+            printf("%-5d ",matrice->matrice[i][j]);
 
         // Si inferieure on affiche les i derniers 0
         for (int j = 0; !matrice->orientation && j < i; j++)
-            printf("0 ");
+            printf("%-5d ", 0);
         
         printf("\n");
     }   

@@ -27,30 +27,45 @@ int main() {
 
     srand(time(NULL));
 
-    int **p = NULL;
-    for(int i = 0; i < NUMBER_ITERATION; i++) {
-       
+    int **prod = NULL;
 
+    for(int i = 0; i < NUMBER_ITERATION; i++) {
+        
+        // On alloue les matrices
+        mat1 = alloue_matrice(n);
+        remplir_matrice(mat1, n ,maxValeur);
+
+        mat2 = alloue_matrice(n);
+        remplir_matrice(mat1, n ,maxValeur);
+
+        matTriangulaireSup = alloue_matrice_triangulaire(n, 1);
+        remplir_matrice_triangulaire(matTriangulaireSup, maxValeur);
+
+        matTriangulaireInf = alloue_matrice_triangulaire(n, 0);
+        remplir_matrice_triangulaire(matTriangulaireInf, maxValeur);
+
+        // calcule du temps pour le premier algorithme (produit matrice non triangulaire)
         temps_initial = clock();
-        p = produit_mat_1(mat1, mat2, n);
+        prod = produit_mat_1(mat1, mat2, n);
         temps_final = clock();
         temps_cpu_algo1 = ((double) (temps_final - temps_initial)) / CLOCKS_PER_SEC;
+        desalloue_matrice(prod, n);
 
-        desalloue_matrice(p, n);
-        matTriangulaireSup = alloue_matrice_triangulaire(n,1);
-        matTriangulaireInf = alloue_matrice_triangulaire(n,0);
+        // calcule du temps pour le premier algorithme (produit matrice non triangulaire)
         temps_initial = clock();
-        p = produit_triang(matTriangulaireSup, matTriangulaireInf);
+        prod = produit_triang(matTriangulaireSup, matTriangulaireInf);
         temps_final = clock();
         temps_cpu_algo2 = ((double) (temps_final - temps_initial)) / CLOCKS_PER_SEC;
-
-        desalloue_matrice(p, n);
-
+        desalloue_matrice(prod, n);
+        
         fprintf(file, "%d %f %f\n", n*n, temps_cpu_algo1, temps_cpu_algo2);
 
+        // On libere l'espace memoires alloue
         desalloue_matrice_triangulaire(matTriangulaireInf);
-
         desalloue_matrice_triangulaire(matTriangulaireSup);
+        desalloue_matrice(mat1, n);
+        desalloue_matrice(mat2, n);
+
         n++;
     }
 

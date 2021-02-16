@@ -6,6 +6,41 @@
 - Amayas Sadi 28717408
 
 ---
+## Makefile 
+
+On a automatise les dessins des courbes avec des fichiers de commande et des regles dans le makefile qui lance le gnuplot
+
+```sh
+CC = gcc
+CFLAGC = -Wall -g
+
+PROGS = mesure_tab mesure_mat_verif mesure_mat_prod
+all: $(PROGS)
+
+%.o : %.c %.h
+	$(CC) $(CFLAGC) -o $@ -c $<
+
+mesure_tab : tableau.o matrice.o algo.o mesure_tab.o
+	$(CC) $(CFLAGC) -o $@ $^
+
+mesure_mat_verif : tableau.o matrice.o algo.o mesure_mat_verif.o
+	$(CC) $(CFLAGC) -o $@ $^
+
+mesure_mat_prod : tableau.o matrice.o algo.o mesure_mat_prod.o
+	$(CC) $(CFLAGC) -o $@ $^
+
+plot_tab :
+	gnuplot -p < commande_tab.txt
+
+plot_mat_verif :
+	gnuplot -p < commande_mat_verif.txt
+
+plot_mat_prod :
+	gnuplot -p < commande_mat_prod.txt
+
+clean :
+	rm -rf $(PROGS) *.o *.ps sortie_vitesse_*.txt
+```
 
 ## Exercice 1
 
@@ -149,8 +184,6 @@ definitely lost: 400 bytes in 1 blocks
 
 ## Exercice 2
 
-### Partie 1
-
 #### Description des fichiers .c et .h
 
 - Le fichier tableau.h et tableau.c 
@@ -177,6 +210,8 @@ typedef struct _matrice_triangulaire {
 - Le fichier commun.c
 
 Contient une constante commune entre les fichiers de mesures et une macro pour l'affichage des erreurs
+
+### Partie 1
 
 #### Question 1.1
 

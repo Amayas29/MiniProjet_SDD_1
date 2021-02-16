@@ -4,6 +4,7 @@
 #include "matrice.h"
 #include "commun.h"
 
+// permet de faire la somme de la difference carre des case d'un tableau en O(n²)
 int somme_1(int *tableau, int taille) {
     int somme = 0;
 
@@ -16,6 +17,7 @@ int somme_1(int *tableau, int taille) {
     return somme;
 }
 
+// permet de faire la somme de la difference carre des case d'un tableau en O(n)
 int somme_2(int *tableau, int taille) {
     int sommeX = 0;
     int sommeXCarre = 0;
@@ -28,11 +30,12 @@ int somme_2(int *tableau, int taille) {
     return 2 * taille * sommeXCarre - 2 * sommeX * sommeX;
 }
 
-int verfie_matrice_1(int **matrice, int n, int m) {
+// permet de vericier si toutes les valeurs d'une matrice sont differentes en O(n⁴)
+int verfie_matrice_1(int **matrice, int n) {
     for(int i = 0; i < n; i++) {
-        for(int j = 0; j < m; j++) {
+        for(int j = 0; j < n; j++) {
             for(int k = 0; k < n; k++) {
-                for(int l = 0; l < m; l++) {
+                for(int l = 0; l < n; l++) {
                     if(i != k && j != l && matrice[i][j] == matrice[k][l])
                         return 0;
                 }
@@ -42,14 +45,16 @@ int verfie_matrice_1(int **matrice, int n, int m) {
     return 1;
 }
 
-int verfie_matrice_2(int **matrice, int n, int m, int *check, int maxValeur) {
+// permet de vericier si toutes les valeurs d'une matrice sont differentes en O(n²)
+int verfie_matrice_2(int **matrice, int n, int *check, int maxValeur) {
 
+    //on utilise un tableau de maxValeur de valeurs comme tableau de booleen (0 si il n'existe pas 1 sinon)
     for(int i = 0; i < maxValeur; i++)
         check[ i ] = 0;
     
 
     for(int i = 0; i < n; i++) {
-        for(int j = 0; j < m; j++) {
+        for(int j = 0; j < n; j++) {
             if(check[matrice[i][j]] != 0) 
                 return 0;
             
@@ -60,11 +65,13 @@ int verfie_matrice_2(int **matrice, int n, int m, int *check, int maxValeur) {
     return 1;
 }
 
+//permet de faire le produit matricielle
 int **produit_mat_1(int **mat1, int **mat2, int m) {
     
     int **prod = alloue_matrice(m);
     if(!prod) return NULL;
 
+    // c'est la somme du produit ligne * colonne
     for(int i = 0; i < m; i++) {
         for(int j = 0; j < m; j++) {
             prod[i][j] = 0;
@@ -76,6 +83,7 @@ int **produit_mat_1(int **mat1, int **mat2, int m) {
     return prod;
 }
 
+//permet de faire le produit matricielle entre deux matrice triangulaire sup * inf
 int **produit_triang(MatriceTriangulaire *sup, MatriceTriangulaire *inf) {
 
     if(sup->taille != inf->taille) {
@@ -94,6 +102,7 @@ int **produit_triang(MatriceTriangulaire *sup, MatriceTriangulaire *inf) {
         return NULL;
     }
     int l = 0;
+    // c'est la somme du produit ligne * colonne
     for(int i = 0; i < sup->taille; i++) {
         l = 0;
      for(int j = 0; j < sup->taille; j++) {  

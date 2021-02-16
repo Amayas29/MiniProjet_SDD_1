@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGC = -Wall
+CFLAGC = -Wall -g
 
 PROGS = mesure_tab mesure_mat_verif mesure_mat_prod
 all: $(PROGS)

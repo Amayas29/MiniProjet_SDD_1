@@ -5,6 +5,7 @@
 #include "matrice.h"
 #include "commun.h"
 
+// permet d'allouer un tableau d'une taille donnee
 int *alloue_tableau(int taille) {
 
     int *tableau = malloc(sizeof(int) * taille);
@@ -15,10 +16,12 @@ int *alloue_tableau(int taille) {
     return tableau;
 }
 
+// permet de liberer un tableau
 void desalloue_tableau(int *tableau) {
     free(tableau);
 }
 
+//permet de remplire un tableau random
 void remplir_tableau(int *tableau, int taille, int valeur) {
     if(!tableau) return;
 
@@ -26,6 +29,7 @@ void remplir_tableau(int *tableau, int taille, int valeur) {
         tableau[ i ] = rand() % valeur; 
 }
 
+// permet d'afficher un tableau
 void afficher_tableau(int *tableau, int taille) {
     if(!tableau) return;
 

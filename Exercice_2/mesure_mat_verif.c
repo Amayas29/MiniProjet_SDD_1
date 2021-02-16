@@ -10,7 +10,7 @@ int main() {
 
     int maxValeur = 100;
     int *check = alloue_tableau(maxValeur);
-    int n = 50, m = 50;
+    int n = 50;
 
     char *file_name = "sortie_vitesse_mat_verif.txt";
     FILE *file = fopen(file_name, "w");
@@ -25,24 +25,24 @@ int main() {
     srand(time(NULL));
 
     for(int i = 0; i < NUMBER_ITERATION; i++) {
-        mat = alloue_matrice(n, m);
-        remplir_matrice(mat, n, m, maxValeur);
+        mat = alloue_matrice(n);
+        remplir_matrice(mat, n ,maxValeur);
 
         temps_initial = clock();
-        verfie_matrice_1(mat, n, m);
+        verfie_matrice_1(mat, n);
         temps_final = clock();
         temps_cpu_algo1 = ((double) (temps_final - temps_initial)) / CLOCKS_PER_SEC;
 
         temps_initial = clock();
-        verfie_matrice_2(mat, n, m, check, maxValeur);
+        verfie_matrice_2(mat, n, check, maxValeur);
         temps_final = clock();
         temps_cpu_algo2 = ((double) (temps_final - temps_initial)) / CLOCKS_PER_SEC;
 
-        fprintf(file, "%d %f %f\n", n*m, temps_cpu_algo1, temps_cpu_algo2);
+        fprintf(file, "%d %f %f\n", n*n, temps_cpu_algo1, temps_cpu_algo2);
 
         desaloue_matrice(mat, n);
         n++;
-        m++;
+        
     }
 
     desalloue_tableau(check);

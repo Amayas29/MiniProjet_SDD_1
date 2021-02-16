@@ -150,7 +150,7 @@ void afficher_matrice_triangulaire(MatriceTriangulaire *matrice){
             printf("%-5d ",matrice->matrice[i][j]);
 
         // Si inferieure on affiche les i derniers 0
-        for (int j = 0; !matrice->orientation && j < i; j++)
+        for (int j = 0; !matrice->orientation && j < matrice->taille - i - 1; j++)
             printf("%-5d ", 0);
         
         printf("\n");

@@ -90,7 +90,7 @@ int **produit_triang(MatriceTriangulaire *sup, MatriceTriangulaire *inf) {
         return NULL;
     }
 
-    if(sup->orientation && !inf->orientation){
+    if(!sup->orientation || inf->orientation){
         print_probleme("Prbleme d'incompatibilité");
         return NULL;
     }
@@ -102,21 +102,18 @@ int **produit_triang(MatriceTriangulaire *sup, MatriceTriangulaire *inf) {
         return NULL;
     }
 
-    int l = 0;
-    
+    int debut = -1;
+
     // c'est la somme du produit ligne * colonne
     for(int i = 0; i < sup->taille; i++) {
-        l = 0;
-     for(int j = 0; j < sup->taille; j++) {  
-        prod[i][j] = 0;
-        for (int k = 0; k < sup->taille - j; j++) {   
-            prod[i][j] += sup->matrice[i][l] * inf->matrice[k][j];
-            l++;
-            if(l >= sup->taille -i)
-                break;
-        }
-        
-     } 
-  }
+        for(int j = 0; j < inf->taille; j++) {  
+            prod[i][j] = 0;
+
+            debut = i < j ? j : i;
+            for(int k = debut; k < sup->taille; k++)
+                prod[i][j] += sup->matrice[i][k-i] * inf->matrice[k][j];
+        } 
+    }
+
     return prod;
 }

@@ -9,7 +9,7 @@
 int main() {
 
     int maxValeur = 100;
-    int n = 50;
+    int n = 1000;
 
     char *file_name = "sortie_vitesse_mat_prod.txt";
     FILE *file = fopen(file_name, "w");
@@ -58,7 +58,7 @@ int main() {
         temps_cpu_algo2 = ((double) (temps_final - temps_initial)) / CLOCKS_PER_SEC;
         desalloue_matrice(prod, n);
         
-        fprintf(file, "%d %f %f\n", n*n, temps_cpu_algo1, temps_cpu_algo2);
+        fprintf(file, "%d %f %f\n", n, temps_cpu_algo1, temps_cpu_algo2);
 
         // On libere l'espace memoires alloue
         desalloue_matrice_triangulaire(matTriangulaireInf);

@@ -46,7 +46,10 @@ int verfie_matrice_1(int **matrice, int n) {
 }
 
 // permet de vericier si toutes les valeurs d'une matrice sont differentes en O(n²)
-int verfie_matrice_2(int **matrice, int n, int *check, int maxValeur) {
+int verfie_matrice_2(int **matrice, int n, int maxValeur) {
+
+    // On alloue le tableau le tableau de borne
+    int *check = alloue_tableau(maxValeur);
 
     //on utilise un tableau de maxValeur de valeurs comme tableau de booleen (0 si il n'existe pas 1 sinon)
     for(int i = 0; i < maxValeur; i++)
@@ -54,13 +57,17 @@ int verfie_matrice_2(int **matrice, int n, int *check, int maxValeur) {
 
     for(int i = 0; i < n; i++) {
         for(int j = 0; j < n; j++) {
-            if(check[matrice[i][j]] != 0) 
+            if(check[matrice[i][j]] != 0) {
+                // on desaloue le tableau de boolean
+                desalloue_tableau(check);
                 return 0;
-            
+            }
             check[matrice[i][j]] = 1;
         }
     }
 
+    // on desaloue le tableau de boolean
+    desalloue_tableau(check);
     return 1;
 }
 

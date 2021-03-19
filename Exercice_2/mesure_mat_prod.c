@@ -1,13 +1,13 @@
 #include <stdio.h>
-#include <time.h>
 #include <stdlib.h>
+#include <time.h>
+
 #include "algo.h"
+#include "commun.h"
 #include "matrice.h"
 #include "tableau.h"
-#include "commun.h"
 
 int main() {
-
     int maxValeur = 100;
     int n = 1000;
 
@@ -19,7 +19,7 @@ int main() {
 
     MatriceTriangulaire *matTriangulaireSup;
     MatriceTriangulaire *matTriangulaireInf;
-   
+
     clock_t temps_initial;
     clock_t temps_final;
     double temps_cpu_algo1;
@@ -29,14 +29,13 @@ int main() {
 
     int **prod = NULL;
 
-    for(int i = 0; i < NUMBER_ITERATION; i++) {
-        
+    for (int i = 0; i < NUMBER_ITERATION; i++) {
         // On alloue les matrices
         mat1 = alloue_matrice(n);
-        remplir_matrice(mat1, n ,maxValeur);
+        remplir_matrice(mat1, n, maxValeur);
 
         mat2 = alloue_matrice(n);
-        remplir_matrice(mat1, n ,maxValeur);
+        remplir_matrice(mat1, n, maxValeur);
 
         matTriangulaireSup = alloue_matrice_triangulaire(n, 1);
         remplir_matrice_triangulaire(matTriangulaireSup, maxValeur);
@@ -48,16 +47,16 @@ int main() {
         temps_initial = clock();
         prod = produit_mat_1(mat1, mat2, n);
         temps_final = clock();
-        temps_cpu_algo1 = ((double) (temps_final - temps_initial)) / CLOCKS_PER_SEC;
+        temps_cpu_algo1 = ((double)(temps_final - temps_initial)) / CLOCKS_PER_SEC;
         desalloue_matrice(prod, n);
 
         // calcule du temps pour le premier algorithme (produit matrice non triangulaire)
         temps_initial = clock();
         prod = produit_triang(matTriangulaireSup, matTriangulaireInf);
         temps_final = clock();
-        temps_cpu_algo2 = ((double) (temps_final - temps_initial)) / CLOCKS_PER_SEC;
+        temps_cpu_algo2 = ((double)(temps_final - temps_initial)) / CLOCKS_PER_SEC;
         desalloue_matrice(prod, n);
-        
+
         fprintf(file, "%d %f %f\n", n, temps_cpu_algo1, temps_cpu_algo2);
 
         // On libere l'espace memoires alloue

@@ -9,7 +9,7 @@ typedef struct adresse {
 } Adresse;
 
 Adresse *creer_adresse(int n, char *r, int c) {
-    Adresse *new = (Adresse*) malloc(sizeof(Adresse));
+    Adresse *new = (Adresse *)malloc(sizeof(Adresse));
 
     new->numero = n;
     new->rue = strdup(r);
@@ -19,13 +19,13 @@ Adresse *creer_adresse(int n, char *r, int c) {
 }
 
 int main(void) {
-    Adresse *maison = creer_adresse (12, "manoeuvre", 15670);
-    
+    Adresse *maison = creer_adresse(12, "manoeuvre", 15670);
+
     printf("Adresse courante : %d rue %s %d France\n", maison->numero, maison->rue, maison->code_postal);
-    
+
     // on libere la memoire allouée
     free(maison->rue);
     free(maison);
-    
+
     return 0;
 }

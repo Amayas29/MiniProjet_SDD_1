@@ -1,52 +1,52 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct tableau{
-	int* tab;
-	int maxTaille;
-	int position;
+typedef struct tableau {
+    int *tab;
+    int maxTaille;
+    int position;
 } Tableau;
 
 void ajouterElement(int a, Tableau *t) {
-	t->tab[t->position] = a;
-	t->position++;
+    t->tab[t->position] = a;
+    t->position++;
 }
 
 Tableau *initTableau(int maxTaille) {
-	Tableau *t = (Tableau*) malloc(sizeof(Tableau));
+    Tableau *t = (Tableau *)malloc(sizeof(Tableau));
 
-	t->position = 0;
-	t->maxTaille = maxTaille;
-	t->tab = (int*) malloc(sizeof(int) * maxTaille);
+    t->position = 0;
+    t->maxTaille = maxTaille;
+    t->tab = (int *)malloc(sizeof(int) * maxTaille);
 
-	return t;
+    return t;
 }
 
-void affichageTableau(Tableau* t) {
-	printf("t->position = %d\n", t->position);
-	printf("[ ");	
+void affichageTableau(Tableau *t) {
+    printf("t->position = %d\n", t->position);
+    printf("[ ");
 
-	for (int i = 0; i < (t->position); i++){
-		printf("%d ", t->tab[i]);	
-	}
+    for (int i = 0; i < (t->position); i++) {
+        printf("%d ", t->tab[i]);
+    }
 
-	printf("]\n");
+    printf("]\n");
 }
 
 int main() {
-	Tableau *t;
+    Tableau *t;
 
-	t = initTableau(100);
+    t = initTableau(100);
 
-	ajouterElement(5, t);
-	ajouterElement(18, t);
-	ajouterElement(99999, t);
-	ajouterElement(-452, t);
-	ajouterElement(4587, t);
+    ajouterElement(5, t);
+    ajouterElement(18, t);
+    ajouterElement(99999, t);
+    ajouterElement(-452, t);
+    ajouterElement(4587, t);
 
-	affichageTableau(t);
-	
-	// liberer la memoire du tableau
-	free(t->tab);	
-	free(t);
+    affichageTableau(t);
+
+    // liberer la memoire du tableau
+    free(t->tab);
+    free(t);
 }
